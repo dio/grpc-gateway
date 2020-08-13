@@ -86,6 +86,9 @@ type Registry struct {
 	// simpleOperationIDs removes the service prefix from the generated
 	// operationIDs. This risks generating duplicate operationIDs.
 	simpleOperationIDs bool
+
+	// List of resource names in addition of "parent" and "user".
+	resourceNames []string
 }
 
 type repeatedFieldSeparator struct {
@@ -522,6 +525,16 @@ func (r *Registry) SetSimpleOperationIDs(use bool) {
 // GetSimpleOperationIDs returns simpleOperationIDs
 func (r *Registry) GetSimpleOperationIDs() bool {
 	return r.simpleOperationIDs
+}
+
+// SetResourceNames sets resourceNames.
+func (r *Registry) SetResourceNames(names string) {
+	r.resourceNames = strings.Split(names, "/")
+}
+
+// GetResourceNames returns resourceNames.
+func (r *Registry) GetResourceNames() []string {
+	return r.resourceNames
 }
 
 // sanitizePackageName replaces unallowed character in package name
